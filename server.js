@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Middleware to enable CORS and parse JSON requests
 app.use(cors());
 app.use(express.json());
 
@@ -18,10 +17,8 @@ const products = [
     availability: true,
     image: "https://via.placeholder.com/300"
   },
-  // Add more products as needed
 ];
 
-// Endpoint to fetch all products
 app.get('/api/products', (req, res) => {
   const { category, company, rating, minPrice, maxPrice, availability, sort, page } = req.query;
 
@@ -59,7 +56,6 @@ app.get('/api/products', (req, res) => {
     });
   }
 
-  // Pagination logic
   const itemsPerPage = 10;
   const currentPage = parseInt(page) || 1;
   const totalItems = filteredProducts.length;
@@ -74,7 +70,6 @@ app.get('/api/products', (req, res) => {
   });
 });
 
-// Endpoint to fetch a product by ID
 app.get('/api/products/:id', (req, res) => {
   const product = products.find(p => p.id === parseInt(req.params.id));
   if (product) {
